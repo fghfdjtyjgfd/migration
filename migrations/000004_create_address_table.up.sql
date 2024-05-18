@@ -1,8 +1,8 @@
 CREATE TABLE Address (
-  address_id bigint(20) PRIMARY KEY,
-  created_at datetime,
-  updated_at datetime,
-  deleted_at datetime,
+  address_id bigint PRIMARY KEY,
+  created_at timestamp with time zone not null,
+  updated_at timestamp with time zone not null,
+  deleted_at timestamp with time zone,
   house varchar(50),
   street varchar(50),
   city varchar(50),

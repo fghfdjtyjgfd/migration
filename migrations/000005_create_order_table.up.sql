@@ -1,10 +1,10 @@
-CREATE TABLE Order (
-  order_id bigint(20) PRIMARY KEY,
-  created_at datetime,
-  updated_at datetime,
-  deleted_at datetime,
+CREATE TABLE Orders (
+  order_id bigint PRIMARY KEY,
+  created_at timestamp with time zone not null,
+  updated_at timestamp with time zone not null,
+  deleted_at timestamp with time zone,
   price int,
   discount int,
-  payment_id bigint(20),
-  product_user_id bigint(20)
+  payment_id bigint,
+  product_user_id bigint
 );
