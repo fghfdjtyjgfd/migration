@@ -9,15 +9,18 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/namsral/flag"
+	"github.com/spf13/viper"
 )
 
 func main() {
-	var dbURL = "localhost"
-	var username = "testUser"
-	var password = "P@ssw0rd"
-	var name = "test"
+	InitConfig()
 
-	var port = 10023
+	var dbURL = viper.GetString("db.host")
+	var username = viper.GetString("db.username")
+	var password = viper.GetString("db.password")
+	var name = viper.GetString("db.name")
+
+	var port = viper.GetInt("db.port")
 	var steps = 0
 
 	flag.StringVar(&dbURL, "url", dbURL, "the url database of the flag")
@@ -50,4 +53,15 @@ func main() {
 		}
 	}
 	log.Println("Success")
+}
+
+func InitConfig() {
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath("configs")
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(err)
+	}
 }
